@@ -1,0 +1,8 @@
+baseURL = "http://mrriptide.github.io/bungeecord-kubernetes/"
+languageCode = "en-us"
+title = "Bungeecord Kubernetes"
+theme = "docsy"
+
+
+[params.ui]
+sidebar_menu_compact = false

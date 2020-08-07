@@ -1,0 +1,116 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: minecraft-data-pvc
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: bungee-data-pvc
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bungee-lb
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 25565
+      targetPort: 25577
+  selector:
+    app: bungeecord
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bungeecord
+  labels:
+    app: bungeecord
+spec:
+  selector:
+    matchLabels:
+      app: bungeecord
+  template:
+    metadata:
+      labels:
+        app: bungeecord
+    spec:
+      volumes:
+        - name: bungee-data
+          persistentVolumeClaim:
+            claimName: bungee-data-pvc
+      containers:
+      - name: bungeecord
+        image: itzg/bungeecord
+        tty: true
+        stdin: true
+        env:
+          - name: TYPE
+            value: "WATERFALL"
+        volumeMounts:
+          - name: bungee-data
+            mountPath: /server
+        ports:
+          - containerPort: 25565
+      serviceAccountName: minigame-service-account
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: paper
+spec:
+  ports:
+  - port: 25565
+  selector:
+    app: paper
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paper
+  labels:
+    app: paper
+spec:
+  selector:
+    matchLabels:
+      app: paper
+  template:
+    metadata:
+      labels:
+        app: paper
+    spec:
+      volumes:
+        - name: paper
+          persistentVolumeClaim:
+            claimName: minecraft-data-pvc
+      containers:
+      - name: paper
+        image: itzg/minecraft-server
+        tty: true
+        stdin: true
+        env:
+          - name: EULA
+            value: "TRUE"
+          - name: ONLINE_MODE
+            value: "FALSE"
+          - name: TYPE
+            value: "PAPER"
+        volumeMounts:
+          - name: paper
+            mountPath: /data
+
