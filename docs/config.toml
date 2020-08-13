@@ -3,6 +3,8 @@ languageCode = "en-us"
 title = "Bungeecord Kubernetes"
 theme = "docsy"
 
+[markup.goldmark.renderer]
+unsafe= true
 
 [params.ui]
 sidebar_menu_compact = false

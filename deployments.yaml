@@ -67,7 +67,7 @@ spec:
             mountPath: /server
         ports:
           - containerPort: 25565
-      serviceAccountName: minigame-service-account
+      #serviceAccountName: minigame-service-account
 ---
 apiVersion: v1
 kind: Service
@@ -113,4 +113,3 @@ spec:
         volumeMounts:
           - name: paper
             mountPath: /data
-

@@ -12,7 +12,10 @@ description: >
 
 You will need an recent version of [Kubernetes](https://kubernetes.io/) to use this project. This quickstart is written specifically for [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine), however it should work on most other hosting providers with minor changes.
 
-The rest of this quickstart is under the assumption that you have an open command line connected to your kubernetes cluster.
+{{% alert title="🛑 STOP 🛑" color="warning" %}}
+The rest of this quickstart is under the assumption that you have an open command line connected to your kubernetes cluster. Make sure you can connect before continuing.
+{{% /alert %}}
+
 
 ## Setting it up for a single survival server
 
@@ -24,7 +27,7 @@ Apply the yaml definitions to your kubernetes cluster
 ```
 kubectl apply -f deployments.yaml
 ```
-Congratulations, you should now have a bungeecord Minecraft server running in your kubernetes cluster.
+Congratulations, you should now have a bungeecord Minecraft server running in your kubernetes cluster. By using this server, you agree to the [Minecraft EULA](https://www.minecraft.net/en-us/eula/).
 
 ### Connecting to the server
 
