@@ -71,7 +71,7 @@ In order change configuration of the server, you must first know the name of the
 ```
 kubectl get pods
 ```
-Then find the pod name that follows the pattern ```pod/paper-XXXXXX```.
+Then find the pod name that follows the pattern ```pod/paper-XXXXXXXXXX-XXXXX```.
 
 Now that you have the pod's name, get inside the pod running the server:
 ```
@@ -86,9 +86,9 @@ cd /data
 Most, if not all, of the configuration for your minecraft server will be available within that directory.
 
 #### Useful Commands for Configuration
-|Command               |Usage                                               |
-|----------------------|----------------------------------------------------|
-|```ls```              |List all files and subdirectories within a directory|
-|```ls -R```           |List all files and subdirectories recursively       |
-|```cat <file-name>``` |Print the contents of a file                        |
-|```nano <file-name>```|Edit a file                                         |
+|Command                 |Usage                                               |Manual                                                      |
+|------------------------|----------------------------------------------------|------------------------------------------------------------|
+|```ls```                |List all files and subdirectories within a directory|[Man Page](https://man7.org/linux/man-pages/man1/ls.1.html) |
+|```ls -R```             |List all files and subdirectories recursively       |[Man Page](https://man7.org/linux/man-pages/man1/ls.1.html) |
+|```cat <file-name>```   |Print the contents of a file                        |[Man Page](https://man7.org/linux/man-pages/man1/cat.1.html)|
+|```nano <file-name>```  |Edit a file                                         |[Man Page](https://www.nano-editor.org/dist/v2.1/nano.html) |

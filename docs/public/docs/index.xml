@@ -1,0 +1,420 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bungeecord Kubernetes – Documentation</title>
+    <link>http://mrriptide.github.io/bungeecord-kubernetes/docs/</link>
+    <description>Recent content in Documentation on Bungeecord Kubernetes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 14 Aug 2020 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="http://mrriptide.github.io/bungeecord-kubernetes/docs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Configuring Bungeecord</title>
+      <link>http://mrriptide.github.io/bungeecord-kubernetes/docs/bungee/configuration/</link>
+      <pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://mrriptide.github.io/bungeecord-kubernetes/docs/bungee/configuration/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;environment-variables&#34;&gt;Environment Variables&lt;/h2&gt;
+&lt;p&gt;There are several different environment variables that can be adjusted to configure your deployment properly. Any additions should be made in the section labeled &lt;code&gt;&amp;lt;changes&amp;gt;&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;containers:
+- name: bungeecord
+  image: itzg/bungeecord
+  tty: true
+  stdin: true
+  env:
+    &amp;lt;changes&amp;gt;
+  volumeMounts:
+    - name: bungee-data
+      mountPath: /server
+  ports:
+    - containerPort: 25565
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;choosing-a-server-type&#34;&gt;Choosing a Server Type&lt;/h3&gt;
+&lt;p&gt;There are two types of servers you can use by default. To pick one, set the &lt;code&gt;TYPE&lt;/code&gt; environment variable to &lt;code&gt;BUNGEE&lt;/code&gt; or &lt;code&gt;WATERFALL&lt;/code&gt;. For example, if you want to run &lt;code&gt;WATERFALL&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- name: TYPE
+  value: &amp;quot;WATERFALL&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;config-files&#34;&gt;Config files&lt;/h2&gt;
+&lt;p&gt;After the container is running, there may still be a few changes you want to make to the server files.&lt;/p&gt;
+&lt;p&gt;In order change configuration of the server, you must first know the name of the pod that the server is running in. You can find this by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl get pods
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then find the pod name that follows the pattern &lt;code&gt;pod/bungeecord-XXXXXXXXXX-XXXXX&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Now that you have the pod&amp;rsquo;s name, get inside the pod running the server:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl exec --stdin --tty pod/&amp;lt;pod-name&amp;gt; -- /bin/bash
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Once you are inside the pod, navigate to the server directory. If you used the provided setup, it should be accessible through:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd /server
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Most, if not all, of the configuration for your bungeecord server will be available within that directory.&lt;/p&gt;
+&lt;h4 id=&#34;useful-commands-for-configuration&#34;&gt;Useful Commands for Configuration&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Command&lt;/th&gt;
+&lt;th&gt;Usage&lt;/th&gt;
+&lt;th&gt;Manual&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ls&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;List all files and subdirectories within a directory&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://man7.org/linux/man-pages/man1/ls.1.html&#34;&gt;Man Page&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ls -R&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;List all files and subdirectories recursively&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://man7.org/linux/man-pages/man1/ls.1.html&#34;&gt;Man Page&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cat &amp;lt;file-name&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Print the contents of a file&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://man7.org/linux/man-pages/man1/cat.1.html&#34;&gt;Man Page&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;vi &amp;lt;file-name&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Edit a file&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://man7.org/linux/man-pages/man1/vi.1p.html&#34;&gt;Man Page&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;adding-a-server&#34;&gt;Adding a Server&lt;/h3&gt;
+&lt;p&gt;If you want to add a minecraft server to the bungeecord server, you will need to edit &lt;code&gt;config.yml&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nano config.yml
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Under &lt;code&gt;servers:&lt;/code&gt;, add a new entry:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;server name&amp;gt;:
+  motd: &amp;lt;your motd&amp;gt;
+  address: &amp;lt;service name&amp;gt;.default.svc.cluster.local:25565
+  restricted: false
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Set &lt;code&gt;restricted&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt; if you want to restrict the server to only players with a certain permission.&lt;/p&gt;
+&lt;p&gt;Then log out of the pod running bungeecord with &lt;code&gt;logout&lt;/code&gt; and reboot the bungeecord server:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl exec pod/&amp;lt;pod-name&amp;gt; -- rcon-cli end
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Configuring the Server</title>
+      <link>http://mrriptide.github.io/bungeecord-kubernetes/docs/server/configuration/</link>
+      <pubDate>Wed, 12 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://mrriptide.github.io/bungeecord-kubernetes/docs/server/configuration/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;environment-variables&#34;&gt;Environment Variables&lt;/h2&gt;
+&lt;p&gt;There are several different environment variables that can be adjusted to configure your deployment properly. Any additions should be made in the section of the deployment yaml labeled &lt;code&gt;&amp;lt;changes&amp;gt;&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;containers:
+- name: paper
+image: itzg/minecraft-server
+tty: true
+stdin: true
+env:
+&amp;lt;changes&amp;gt;
+volumeMounts:
+- name: paper
+mountPath: /data
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;accepting-the-eula&#34;&gt;Accepting the EULA&lt;/h3&gt;
+&lt;p&gt;Mojang requires accepting the &lt;a href=&#34;https://www.minecraft.net/en-us/eula/&#34;&gt;Minecraft EULA&lt;/a&gt; in order to run the server. In order to accept it, set the environment variable &lt;code&gt;EULA&lt;/code&gt; in the container to &lt;code&gt;&amp;quot;true&amp;quot;&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- name: EULA
+  value: &amp;quot;true&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;choosing-a-minecraft-version&#34;&gt;Choosing a Minecraft version&lt;/h3&gt;
+&lt;p&gt;In order to select the version of Minecraft you want your server to be running, set the &lt;code&gt;VERSION&lt;/code&gt; environment variable in the container to the version you would like to run.
+For example, if you would like to run 1.8.9:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- name: VERSION
+  value: &amp;quot;1.8.9&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;choosing-a-server-type&#34;&gt;Choosing a server type&lt;/h3&gt;
+&lt;p&gt;To select a server type, set the &lt;code&gt;type&lt;/code&gt; environment variable in the container to the type you would like to run. Valid server types are &lt;code&gt;SPIGOT&lt;/code&gt;, &lt;code&gt;BUKKIT&lt;/code&gt;, &lt;code&gt;PAPER&lt;/code&gt;, &lt;code&gt;TUINITY&lt;/code&gt;, &lt;code&gt;MAGMA&lt;/code&gt;, &lt;code&gt;MOHIST&lt;/code&gt;, &lt;code&gt;CATSERVER&lt;/code&gt;, &lt;code&gt;FTBA&lt;/code&gt;, &lt;code&gt;CURSEFORGE&lt;/code&gt;, &lt;code&gt;SPONGEVANILLA&lt;/code&gt;, and &lt;code&gt;FABRIC&lt;/code&gt;. Several of these version have special instructions, which can be found on &lt;a href=&#34;https://github.com/itzg/docker-minecraft-server/blob/master/README.md#running-a-bukkitspigot-server&#34;&gt;itzg&amp;rsquo;s documentation&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For example, if you would like to use PaperSpigot(the default in deployments.yaml):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- name: TYPE
+  value: &amp;quot;PAPER&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;or Bukkit:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- name: TYPE
+  value: &amp;quot;BUKKIT&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;disable-online-mode&#34;&gt;Disable Online Mode&lt;/h3&gt;
+&lt;p&gt;In order to use Bungeecord, the minecraft server must be in offline mode. In order to set this, set the environment variable &lt;code&gt;ONLINE_MODE&lt;/code&gt; to &lt;code&gt;&amp;quot;false&amp;quot;&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- name: ONLINE_MODE
+  value: &amp;quot;false&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;config-files&#34;&gt;Config files&lt;/h2&gt;
+&lt;p&gt;After the container is running, there may still be a few changes you want to make to the server files.&lt;/p&gt;
+&lt;p&gt;In order change configuration of the server, you must first know the name of the pod that the server is running in. You can find this by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl get pods
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then find the pod name that follows the pattern &lt;code&gt;pod/paper-XXXXXXXXXX-XXXXX&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Now that you have the pod&amp;rsquo;s name, get inside the pod running the server:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl --stdin --tty pod/&amp;lt;pod-name&amp;gt; -- /bin/bash
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Once you are inside the pod, navigate to the server directory. If you used the provided setup, it should be accessible through:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd /data
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Most, if not all, of the configuration for your minecraft server will be available within that directory.&lt;/p&gt;
+&lt;h4 id=&#34;useful-commands-for-configuration&#34;&gt;Useful Commands for Configuration&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Command&lt;/th&gt;
+&lt;th&gt;Usage&lt;/th&gt;
+&lt;th&gt;Manual&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ls&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;List all files and subdirectories within a directory&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://man7.org/linux/man-pages/man1/ls.1.html&#34;&gt;Man Page&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ls -R&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;List all files and subdirectories recursively&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://man7.org/linux/man-pages/man1/ls.1.html&#34;&gt;Man Page&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cat &amp;lt;file-name&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Print the contents of a file&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://man7.org/linux/man-pages/man1/cat.1.html&#34;&gt;Man Page&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;nano &amp;lt;file-name&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Edit a file&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.nano-editor.org/dist/v2.1/nano.html&#34;&gt;Man Page&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Interacting With the Server</title>
+      <link>http://mrriptide.github.io/bungeecord-kubernetes/docs/bungee/interacting/</link>
+      <pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://mrriptide.github.io/bungeecord-kubernetes/docs/bungee/interacting/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;accessing-logs&#34;&gt;Accessing logs&lt;/h2&gt;
+&lt;p&gt;Accessing the logs is a very important part of running a Minecraft server.&lt;/p&gt;
+&lt;h3 id=&#34;finding-the-pod-name&#34;&gt;Finding the pod name&lt;/h3&gt;
+&lt;p&gt;In order to access the logs of the server, you must first know the name of the pod that the server is running in. You can find this by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl get pods
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then find the pod name that follows the pattern &lt;code&gt;pod/bungeecord-XXXXXXXXXX-XXXXX&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;accessing-the-pods-logs&#34;&gt;Accessing the pod&amp;rsquo;s logs&lt;/h3&gt;
+&lt;p&gt;Luckily, the image we&amp;rsquo;re using logs the bungeecord logs into the pod&amp;rsquo;s logs, so all we have to do is view the logs for the pod itself:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl logs pod/&amp;lt;your-pod-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;sending-console-commands&#34;&gt;Sending console commands&lt;/h2&gt;
+&lt;p&gt;By default, no users are given any permissions within the server. If you want to give yourself OP permissions or run any command with console permissions, you&amp;rsquo;ll first need to be able to access the console.&lt;/p&gt;
+&lt;h3 id=&#34;finding-the-pod-name-1&#34;&gt;Finding the pod name&lt;/h3&gt;
+&lt;p&gt;In order to send commands to the server, you must first know the name of the pod that the server is running in. You can find this by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl get pods
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then find the pod name that follows the pattern &lt;code&gt;pod/bungeecord-XXXXXXXXXX-XXXXX&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;sending-single-commands&#34;&gt;Sending single commands&lt;/h3&gt;
+&lt;p&gt;The image used in this example has rcon enabled by default, so you can send commands to the server through a simple &lt;code&gt;exec&lt;/code&gt; command:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl exec pod/&amp;lt;your-pod-name&amp;gt; -- rcon-cli &amp;lt;your-command&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;sending-multiple-commands&#34;&gt;Sending multiple commands&lt;/h3&gt;
+&lt;p&gt;If you want to access the console to send multiple commands, all you have to do is access rcon interactively:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl exec -i pod/&amp;lt;your-pod-name&amp;gt; -- rcon-cli
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Interacting With the Server</title>
+      <link>http://mrriptide.github.io/bungeecord-kubernetes/docs/server/interacting/</link>
+      <pubDate>Mon, 10 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://mrriptide.github.io/bungeecord-kubernetes/docs/server/interacting/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;accessing-logs&#34;&gt;Accessing logs&lt;/h2&gt;
+&lt;p&gt;Accessing the logs is a very important part of running a Minecraft server.&lt;/p&gt;
+&lt;h3 id=&#34;finding-the-pod-name&#34;&gt;Finding the pod name&lt;/h3&gt;
+&lt;p&gt;In order to access the logs of the server, you must first know the name of the pod that the server is running in. You can find this by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl get pods
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then find the pod name that follows the pattern &lt;code&gt;pod/paper-XXXXXXXXXX-XXXXX&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;accessing-the-pods-logs&#34;&gt;Accessing the pod&amp;rsquo;s logs&lt;/h3&gt;
+&lt;p&gt;Luckily, the image we&amp;rsquo;re using logs the minecraft logs into the pod&amp;rsquo;s logs, so all we have to do is view the logs for the pod itself:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl logs pod/&amp;lt;your-pod-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;sending-console-commands&#34;&gt;Sending console commands&lt;/h2&gt;
+&lt;p&gt;By default, no users are given any permissions within the server. If you want to give yourself OP permissions or run any command with console permissions, you&amp;rsquo;ll first need to be able to access the console.&lt;/p&gt;
+&lt;h3 id=&#34;finding-the-pod-name-1&#34;&gt;Finding the pod name&lt;/h3&gt;
+&lt;p&gt;In order to send commands to the server, you must first know the name of the pod that the server is running in. You can find this by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl get pods
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then find the pod name that follows the pattern &lt;code&gt;pod/paper-XXXXXXXXXX-XXXXX&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;sending-single-commands&#34;&gt;Sending single commands&lt;/h3&gt;
+&lt;p&gt;The image used in this example has rcon enabled by default, so you can send commands to the server through a simple &lt;code&gt;exec&lt;/code&gt; command:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl exec pod/&amp;lt;your-pod-name&amp;gt; -- rcon-cli &amp;lt;your-command&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;sending-multiple-commands&#34;&gt;Sending multiple commands&lt;/h3&gt;
+&lt;p&gt;If you want to access the console to send multiple commands, all you have to do is access rcon interactively:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl exec -i pod/&amp;lt;your-pod-name&amp;gt; -- rcon-cli
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Adding and Configuring Plugins</title>
+      <link>http://mrriptide.github.io/bungeecord-kubernetes/docs/bungee/plugins/</link>
+      <pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://mrriptide.github.io/bungeecord-kubernetes/docs/bungee/plugins/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;adding-plugins&#34;&gt;Adding Plugins&lt;/h2&gt;
+&lt;p&gt;There are two techniques for adding plugins to the server. After adding a plugin, make sure to restart the server in order for the plugin to be loaded.&lt;/p&gt;
+&lt;h3 id=&#34;finding-the-pod-name&#34;&gt;Finding the pod name&lt;/h3&gt;
+&lt;p&gt;In order to add plugins to the server, you must first know the name of the pod that the server is running in. You can find this by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl get pods
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then find the pod name that follows the pattern &lt;code&gt;pod/bungeecord-XXXXXXXXXX-XXXXX&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;adding-from-inside-the-pod&#34;&gt;Adding from inside the pod&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;This method may not work with plugins downloaded directly from the bukkit or spigot websites&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;In order to add a plugin from inside the pod, you must first get inside the pod running the server:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl --stdin --tty pod/&amp;lt;pod-name&amp;gt; -- /bin/bash
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Once you are inside the pod, navigate to the plugins directory. If you used the provided setup, it should be accessible through:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd /server/plugins/
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now that you&amp;rsquo;re in the plugins directory, find the link to the plugin download, and download it into the container by using:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;wget &amp;lt;plugin-url&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If the &lt;code&gt;wget&lt;/code&gt; fails, the site you are downloading from may have blocked automatic downloads, in which case, try the next method. However, if it worked, restart your server, and the plugin will load in.&lt;/p&gt;
+&lt;h3 id=&#34;adding-from-outside-the-pod&#34;&gt;Adding from outside the pod&lt;/h3&gt;
+&lt;p&gt;Before continuing, be sure to download the plugin from your prefered source. Navigate in your command line to the directory where the plugin was saved in:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd &amp;lt;path&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now that you&amp;rsquo;re in the same directory as the plugin, move the plugin jar into the container:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl cp &amp;lt;plugin-file-name&amp;gt; &amp;lt;pod-name&amp;gt;:/server/plugins
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now restart the server and the plugin should be loaded in!&lt;/p&gt;
+&lt;h2 id=&#34;configuring-plugins&#34;&gt;Configuring Plugins&lt;/h2&gt;
+&lt;p&gt;Some plugins have varying levels of configuration that needs to be edited in order to get the gameplay you are looking for.&lt;/p&gt;
+&lt;h3 id=&#34;editing-configuration&#34;&gt;Editing Configuration&lt;/h3&gt;
+&lt;p&gt;To be able to edit configuration files, you will need to get inside the pod.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl exec --stdin --tty pod/&amp;lt;pod-name&amp;gt; -- /bin/bash
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Once you&amp;rsquo;re inside the pod, you will need to navigate to the plugins directory&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd /server/plugins
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Most plugins will have their configuration in their own folder within the plugins directory.&lt;/p&gt;
+&lt;h4 id=&#34;useful-commands&#34;&gt;Useful Commands&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Command&lt;/th&gt;
+&lt;th&gt;Usage&lt;/th&gt;
+&lt;th&gt;Manual&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ls&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;List all files and subdirectories within a directory&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://man7.org/linux/man-pages/man1/ls.1.html&#34;&gt;Man Page&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ls -R&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;List all files and subdirectories recursively&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://man7.org/linux/man-pages/man1/ls.1.html&#34;&gt;Man Page&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cat &amp;lt;file-name&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Print the contents of a file&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://man7.org/linux/man-pages/man1/cat.1.html&#34;&gt;Man Page&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;vi &amp;lt;file-name&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Edit a file&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://man7.org/linux/man-pages/man1/vi.1p.html&#34;&gt;Man Page&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Adding and Configuring Plugins</title>
+      <link>http://mrriptide.github.io/bungeecord-kubernetes/docs/server/plugins/</link>
+      <pubDate>Mon, 10 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://mrriptide.github.io/bungeecord-kubernetes/docs/server/plugins/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;adding-plugins&#34;&gt;Adding Plugins&lt;/h2&gt;
+&lt;p&gt;There are two techniques for adding plugins to the server. After adding a plugin, make sure to restart the server in order for the plugin to be loaded.&lt;/p&gt;
+&lt;h3 id=&#34;finding-the-pod-name&#34;&gt;Finding the pod name&lt;/h3&gt;
+&lt;p&gt;In order to add plugins to the server, you must first know the name of the pod that the server is running in. You can find this by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl get pods
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then find the pod name that follows the pattern &lt;code&gt;pod/paper-XXXXXXXXXX-XXXXX&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;adding-from-inside-the-pod&#34;&gt;Adding from inside the pod&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;This method may not work with plugins downloaded directly from the bukkit or spigot websites&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;In order to add a plugin from inside the pod, you must first get inside the pod running the server:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl --stdin --tty pod/&amp;lt;pod-name&amp;gt; -- /bin/bash
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Once you are inside the pod, navigate to the plugins directory. If you used the provided setup, it should be accessible through:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd /data/plugins/
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now that you&amp;rsquo;re in the plugins directory, find the link to the plugin download, and download it into the container by using:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;wget &amp;lt;plugin-url&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If the &lt;code&gt;wget&lt;/code&gt; fails, the site you are downloading from may have blocked automatic downloads, in which case, try the next method. However, if it worked, restart your server, and the plugin will load in.&lt;/p&gt;
+&lt;h3 id=&#34;adding-from-outside-the-pod&#34;&gt;Adding from outside the pod&lt;/h3&gt;
+&lt;p&gt;Before continuing, be sure to download the plugin from your prefered source. Navigate in your command line to the directory where the plugin was saved in:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd &amp;lt;path&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now that you&amp;rsquo;re in the same directory as the plugin, move the plugin jar into the container:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl cp &amp;lt;plugin-file-name&amp;gt; &amp;lt;pod-name&amp;gt;:/data/plugins
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now restart the server and the plugin should be loaded in!&lt;/p&gt;
+&lt;h2 id=&#34;configuring-plugins&#34;&gt;Configuring Plugins&lt;/h2&gt;
+&lt;p&gt;Some plugins have varying levels of configuration that needs to be edited in order to get the gameplay you are looking for.&lt;/p&gt;
+&lt;h3 id=&#34;editing-configuration&#34;&gt;Editing Configuration&lt;/h3&gt;
+&lt;p&gt;To be able to edit configuration files, you will need to get inside the pod.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl exec --stdin --tty pod/&amp;lt;pod-name&amp;gt; -- /bin/bash
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Once you&amp;rsquo;re inside the pod, you will need to navigate to the plugins directory&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd /data/plugins
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Most plugins will have their configuration in their own folder within the plugins directory.&lt;/p&gt;
+&lt;h4 id=&#34;useful-commands&#34;&gt;Useful Commands&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Command&lt;/th&gt;
+&lt;th&gt;Usage&lt;/th&gt;
+&lt;th&gt;Manual&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ls&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;List all files and subdirectories within a directory&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://man7.org/linux/man-pages/man1/ls.1.html&#34;&gt;Man Page&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ls -R&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;List all files and subdirectories recursively&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://man7.org/linux/man-pages/man1/ls.1.html&#34;&gt;Man Page&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cat &amp;lt;file-name&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Print the contents of a file&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://man7.org/linux/man-pages/man1/cat.1.html&#34;&gt;Man Page&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;nano &amp;lt;file-name&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Edit a file&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.nano-editor.org/dist/v2.1/nano.html&#34;&gt;Man Page&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: </title>
+      <link>http://mrriptide.github.io/bungeecord-kubernetes/docs/persistent-volumes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://mrriptide.github.io/bungeecord-kubernetes/docs/persistent-volumes/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

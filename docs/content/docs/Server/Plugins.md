@@ -14,7 +14,7 @@ In order to add plugins to the server, you must first know the name of the pod t
 ```
 kubectl get pods
 ```
-Then find the pod name that follows the pattern ```pod/paper-XXXXXX```.
+Then find the pod name that follows the pattern ```pod/paper-XXXXXXXXXX-XXXXX```.
 
 ### Adding from inside the pod
 *This method may not work with plugins downloaded directly from the bukkit or spigot websites*
@@ -65,8 +65,9 @@ cd /data/plugins
 Most plugins will have their configuration in their own folder within the plugins directory.
 
 #### Useful Commands
-|Command               |Usage                                               |
-|----------------------|----------------------------------------------------|
-|```ls```              |List all files and subdirectories within a directory|
-|```ls -R```           |List all files and subdirectories recursively       |
-|```nano <file-name>```|Edit a file                                         |
+|Command                 |Usage                                               |Manual                                                      |
+|------------------------|----------------------------------------------------|------------------------------------------------------------|
+|```ls```                |List all files and subdirectories within a directory|[Man Page](https://man7.org/linux/man-pages/man1/ls.1.html) |
+|```ls -R```             |List all files and subdirectories recursively       |[Man Page](https://man7.org/linux/man-pages/man1/ls.1.html) |
+|```cat <file-name>```   |Print the contents of a file                        |[Man Page](https://man7.org/linux/man-pages/man1/cat.1.html)|
+|```nano <file-name>```  |Edit a file                                         |[Man Page](https://www.nano-editor.org/dist/v2.1/nano.html) |

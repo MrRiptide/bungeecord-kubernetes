@@ -15,7 +15,7 @@ In order to access the logs of the server, you must first know the name of the p
 ```
 kubectl get pods
 ```
-Then find the pod name that follows the pattern ```pod/paper-XXXXXX```.
+Then find the pod name that follows the pattern ```pod/paper-XXXXXXXXXX-XXXXX```.
 
 ### Accessing the pod's logs
 Luckily, the image we're using logs the minecraft logs into the pod's logs, so all we have to do is view the logs for the pod itself:
@@ -31,7 +31,7 @@ In order to send commands to the server, you must first know the name of the pod
 ```
 kubectl get pods
 ```
-Then find the pod name that follows the pattern ```pod/paper-XXXXXX```.
+Then find the pod name that follows the pattern ```pod/paper-XXXXXXXXXX-XXXXX```.
 
 ### Sending single commands
 The image used in this example has rcon enabled by default, so you can send commands to the server through a simple ```exec``` command:
