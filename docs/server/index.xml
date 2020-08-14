@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bungeecord Kubernetes – The Minecraft Server</title><link>http://mrriptide.github.io/bungeecord-kubernetes/public/docs/server/</link><description>Recent content in The Minecraft Server on Bungeecord Kubernetes</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 07 Aug 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://mrriptide.github.io/bungeecord-kubernetes/public/docs/server/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Configuring the Server</title><link>http://mrriptide.github.io/bungeecord-kubernetes/public/docs/server/configuration/</link><pubDate>Wed, 12 Aug 2020 00:00:00 +0000</pubDate><guid>http://mrriptide.github.io/bungeecord-kubernetes/public/docs/server/configuration/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bungeecord Kubernetes – The Minecraft Server</title><link>http://mrriptide.github.io/bungeecord-kubernetes/docs/server/</link><description>Recent content in The Minecraft Server on Bungeecord Kubernetes</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 07 Aug 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://mrriptide.github.io/bungeecord-kubernetes/docs/server/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Configuring the Server</title><link>http://mrriptide.github.io/bungeecord-kubernetes/docs/server/configuration/</link><pubDate>Wed, 12 Aug 2020 00:00:00 +0000</pubDate><guid>http://mrriptide.github.io/bungeecord-kubernetes/docs/server/configuration/</guid><description>
 &lt;h2 id="environment-variables">Environment Variables&lt;/h2>
 &lt;p>There are several different environment variables that can be adjusted to configure your deployment properly. Any additions should be made in the section of the deployment yaml labeled &lt;code>&amp;lt;changes&amp;gt;&lt;/code>:&lt;/p>
 &lt;pre>&lt;code>containers:
@@ -73,7 +73,7 @@ value: &amp;quot;false&amp;quot;
 &lt;td>&lt;a href="https://www.nano-editor.org/dist/v2.1/nano.html">Man Page&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;/tbody>
-&lt;/table></description></item><item><title>Docs: Interacting With the Server</title><link>http://mrriptide.github.io/bungeecord-kubernetes/public/docs/server/interacting/</link><pubDate>Mon, 10 Aug 2020 00:00:00 +0000</pubDate><guid>http://mrriptide.github.io/bungeecord-kubernetes/public/docs/server/interacting/</guid><description>
+&lt;/table></description></item><item><title>Docs: Interacting With the Server</title><link>http://mrriptide.github.io/bungeecord-kubernetes/docs/server/interacting/</link><pubDate>Mon, 10 Aug 2020 00:00:00 +0000</pubDate><guid>http://mrriptide.github.io/bungeecord-kubernetes/docs/server/interacting/</guid><description>
 &lt;h2 id="accessing-logs">Accessing logs&lt;/h2>
 &lt;p>Accessing the logs is a very important part of running a Minecraft server.&lt;/p>
 &lt;h3 id="finding-the-pod-name">Finding the pod name&lt;/h3>
@@ -95,7 +95,7 @@ value: &amp;quot;false&amp;quot;
 &lt;/code>&lt;/pre>&lt;h3 id="sending-multiple-commands">Sending multiple commands&lt;/h3>
 &lt;p>If you want to access the console to send multiple commands, all you have to do is access rcon interactively:&lt;/p>
 &lt;pre>&lt;code>kubectl exec -i pod/&amp;lt;your-pod-name&amp;gt; -- rcon-cli
-&lt;/code>&lt;/pre></description></item><item><title>Docs: Adding and Configuring Plugins</title><link>http://mrriptide.github.io/bungeecord-kubernetes/public/docs/server/plugins/</link><pubDate>Mon, 10 Aug 2020 00:00:00 +0000</pubDate><guid>http://mrriptide.github.io/bungeecord-kubernetes/public/docs/server/plugins/</guid><description>
+&lt;/code>&lt;/pre></description></item><item><title>Docs: Adding and Configuring Plugins</title><link>http://mrriptide.github.io/bungeecord-kubernetes/docs/server/plugins/</link><pubDate>Mon, 10 Aug 2020 00:00:00 +0000</pubDate><guid>http://mrriptide.github.io/bungeecord-kubernetes/docs/server/plugins/</guid><description>
 &lt;h2 id="adding-plugins">Adding Plugins&lt;/h2>
 &lt;p>There are two techniques for adding plugins to the server. After adding a plugin, make sure to restart the server in order for the plugin to be loaded.&lt;/p>
 &lt;h3 id="finding-the-pod-name">Finding the pod name&lt;/h3>

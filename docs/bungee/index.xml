@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bungeecord Kubernetes – The Bungeecord Server</title><link>http://mrriptide.github.io/bungeecord-kubernetes/public/docs/bungee/</link><description>Recent content in The Bungeecord Server on Bungeecord Kubernetes</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 12 Aug 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://mrriptide.github.io/bungeecord-kubernetes/public/docs/bungee/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Configuring Bungeecord</title><link>http://mrriptide.github.io/bungeecord-kubernetes/public/docs/bungee/configuration/</link><pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate><guid>http://mrriptide.github.io/bungeecord-kubernetes/public/docs/bungee/configuration/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bungeecord Kubernetes – The Bungeecord Server</title><link>http://mrriptide.github.io/bungeecord-kubernetes/docs/bungee/</link><description>Recent content in The Bungeecord Server on Bungeecord Kubernetes</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 12 Aug 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://mrriptide.github.io/bungeecord-kubernetes/docs/bungee/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Configuring Bungeecord</title><link>http://mrriptide.github.io/bungeecord-kubernetes/docs/bungee/configuration/</link><pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate><guid>http://mrriptide.github.io/bungeecord-kubernetes/docs/bungee/configuration/</guid><description>
 &lt;h2 id="environment-variables">Environment Variables&lt;/h2>
 &lt;p>There are several different environment variables that can be adjusted to configure your deployment properly. Any additions should be made in the section labeled &lt;code>&amp;lt;changes&amp;gt;&lt;/code>:&lt;/p>
 &lt;pre>&lt;code>containers:
@@ -70,7 +70,7 @@ restricted: false
 &lt;/code>&lt;/pre>&lt;p>Set &lt;code>restricted&lt;/code> to &lt;code>true&lt;/code> if you want to restrict the server to only players with a certain permission.&lt;/p>
 &lt;p>Then log out of the pod running bungeecord with &lt;code>logout&lt;/code> and reboot the bungeecord server:&lt;/p>
 &lt;pre>&lt;code>kubectl exec pod/&amp;lt;pod-name&amp;gt; -- rcon-cli end
-&lt;/code>&lt;/pre></description></item><item><title>Docs: Interacting With the Server</title><link>http://mrriptide.github.io/bungeecord-kubernetes/public/docs/bungee/interacting/</link><pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate><guid>http://mrriptide.github.io/bungeecord-kubernetes/public/docs/bungee/interacting/</guid><description>
+&lt;/code>&lt;/pre></description></item><item><title>Docs: Interacting With the Server</title><link>http://mrriptide.github.io/bungeecord-kubernetes/docs/bungee/interacting/</link><pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate><guid>http://mrriptide.github.io/bungeecord-kubernetes/docs/bungee/interacting/</guid><description>
 &lt;h2 id="accessing-logs">Accessing logs&lt;/h2>
 &lt;p>Accessing the logs is a very important part of running a Minecraft server.&lt;/p>
 &lt;h3 id="finding-the-pod-name">Finding the pod name&lt;/h3>
@@ -92,7 +92,7 @@ restricted: false
 &lt;/code>&lt;/pre>&lt;h3 id="sending-multiple-commands">Sending multiple commands&lt;/h3>
 &lt;p>If you want to access the console to send multiple commands, all you have to do is access rcon interactively:&lt;/p>
 &lt;pre>&lt;code>kubectl exec -i pod/&amp;lt;your-pod-name&amp;gt; -- rcon-cli
-&lt;/code>&lt;/pre></description></item><item><title>Docs: Adding and Configuring Plugins</title><link>http://mrriptide.github.io/bungeecord-kubernetes/public/docs/bungee/plugins/</link><pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate><guid>http://mrriptide.github.io/bungeecord-kubernetes/public/docs/bungee/plugins/</guid><description>
+&lt;/code>&lt;/pre></description></item><item><title>Docs: Adding and Configuring Plugins</title><link>http://mrriptide.github.io/bungeecord-kubernetes/docs/bungee/plugins/</link><pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate><guid>http://mrriptide.github.io/bungeecord-kubernetes/docs/bungee/plugins/</guid><description>
 &lt;h2 id="adding-plugins">Adding Plugins&lt;/h2>
 &lt;p>There are two techniques for adding plugins to the server. After adding a plugin, make sure to restart the server in order for the plugin to be loaded.&lt;/p>
 &lt;h3 id="finding-the-pod-name">Finding the pod name&lt;/h3>
