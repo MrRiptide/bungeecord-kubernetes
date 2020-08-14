@@ -1,4 +1,4 @@
-baseURL = "http://mrriptide.github.io/bungeecord-kubernetes/public"
+baseURL = "http://mrriptide.github.io/bungeecord-kubernetes/"
 languageCode = "en-us"
 title = "Bungeecord Kubernetes"
 theme = "docsy"
