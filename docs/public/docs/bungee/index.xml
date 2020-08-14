@@ -1,13 +1,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Bungeecord Kubernetes – The Bungeecord Server</title>
-    <link>http://mrriptide.github.io/bungeecord-kubernetes/docs/bungee/</link>
+    <link>http://mrriptide.github.io/bungeecord-kubernetes/public/docs/bungee/</link>
     <description>Recent content in The Bungeecord Server on Bungeecord Kubernetes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 12 Aug 2020 00:00:00 +0000</lastBuildDate>
     
-	  <atom:link href="http://mrriptide.github.io/bungeecord-kubernetes/docs/bungee/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="http://mrriptide.github.io/bungeecord-kubernetes/public/docs/bungee/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -17,10 +17,10 @@
     
     <item>
       <title>Docs: Configuring Bungeecord</title>
-      <link>http://mrriptide.github.io/bungeecord-kubernetes/docs/bungee/configuration/</link>
+      <link>http://mrriptide.github.io/bungeecord-kubernetes/public/docs/bungee/configuration/</link>
       <pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://mrriptide.github.io/bungeecord-kubernetes/docs/bungee/configuration/</guid>
+      <guid>http://mrriptide.github.io/bungeecord-kubernetes/public/docs/bungee/configuration/</guid>
       <description>
         
         
@@ -101,10 +101,10 @@
     
     <item>
       <title>Docs: Interacting With the Server</title>
-      <link>http://mrriptide.github.io/bungeecord-kubernetes/docs/bungee/interacting/</link>
+      <link>http://mrriptide.github.io/bungeecord-kubernetes/public/docs/bungee/interacting/</link>
       <pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://mrriptide.github.io/bungeecord-kubernetes/docs/bungee/interacting/</guid>
+      <guid>http://mrriptide.github.io/bungeecord-kubernetes/public/docs/bungee/interacting/</guid>
       <description>
         
         
@@ -135,10 +135,10 @@
     
     <item>
       <title>Docs: Adding and Configuring Plugins</title>
-      <link>http://mrriptide.github.io/bungeecord-kubernetes/docs/bungee/plugins/</link>
+      <link>http://mrriptide.github.io/bungeecord-kubernetes/public/docs/bungee/plugins/</link>
       <pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://mrriptide.github.io/bungeecord-kubernetes/docs/bungee/plugins/</guid>
+      <guid>http://mrriptide.github.io/bungeecord-kubernetes/public/docs/bungee/plugins/</guid>
       <description>
         
         
